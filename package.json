@@ -1,0 +1,15 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+  },
+  "author": "Szymon Zygadliński",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-react": "^7.23.2"
+  }
+}
