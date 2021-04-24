@@ -25,7 +25,7 @@
             2
         ],
         "linebreak-style": [
-            "error",
+            "off",
             "windows"
         ],
         "quotes": [
@@ -39,7 +39,6 @@
         "comma-dangle": [
             "error",
             "always-multiline"
-            
           ]
     }
 }

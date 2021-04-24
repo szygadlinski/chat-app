@@ -4,12 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "http-server -o client -p 3000"
   },
   "author": "Szymon Zygadliński",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^7.24.0",
     "eslint-plugin-html": "^6.1.2",
-    "eslint-plugin-react": "^7.23.2"
+    "eslint-plugin-react": "^7.23.2",
+    "http-server": "^0.12.3"
   }
 }
