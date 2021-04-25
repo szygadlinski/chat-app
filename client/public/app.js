@@ -10,6 +10,24 @@
 
   let userName;
 
+  const addMessage = (author, content) => {
+    const message = document.createElement('li');
+    message.classList.add('message', 'message--received');
+    if(author === userName) message.classList.add('message--self');
+
+    message.innerHTML = `
+    <h3 class="message__author">${author === userName ? 'You' : author}</h3>
+    <div class="message__content">
+    ${content}
+    </div>
+    `;
+    messagesList.appendChild(message);
+  };
+
+  // eslint-disable-next-line no-undef
+  const socket = io();
+  socket.on('message', event => addMessage(event.author, event.content));
+
   const login = event => {
     event.preventDefault();
 
@@ -23,26 +41,12 @@
     }
   };
 
-  const addMessage = (author, content) => {
-    const message = document.createElement('li');
-    message.classList.add('message', 'message--received');
-    if(author === userName) message.classList.add('message--self');
-
-    message.innerHTML = `
-      <h3 class="message__author">${author === userName ? 'You' : author}</h3>
-      <div class="message__content">
-        ${content}
-      </div>
-    `;
-
-    messagesList.appendChild(message);
-  };
-
   const sendMessage = event => {
     event.preventDefault();
 
     if(messageContentInput.value){
       addMessage(userName, messageContentInput.value);
+      socket.emit('message', { author: userName, content: messageContentInput.value });
       messageContentInput.value = '';
     } else {
       alert('You didn\'t write anything!');
