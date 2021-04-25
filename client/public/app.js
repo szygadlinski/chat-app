@@ -14,6 +14,7 @@
     const message = document.createElement('li');
     message.classList.add('message', 'message--received');
     if(author === userName) message.classList.add('message--self');
+    if(author === 'Chat Bot') message.classList.add('message--chatbot');
 
     message.innerHTML = `
     <h3 class="message__author">${author === userName ? 'You' : author}</h3>
@@ -27,6 +28,8 @@
   // eslint-disable-next-line no-undef
   const socket = io();
   socket.on('message', event => addMessage(event.author, event.content));
+  socket.on('addUser', event => addMessage(event.author, event.content));
+  socket.on('removeUser', event => addMessage(event.author, event.content));
 
   const login = event => {
     event.preventDefault();
@@ -34,6 +37,7 @@
     if(userNameInput.value){
       // eslint-disable-next-line no-unused-vars
       userName = userNameInput.value;
+      socket.emit('login', userName);
       loginForm.classList.toggle('show');
       messagesSection.classList.toggle('show');
     } else {
